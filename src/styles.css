@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-bg: #0b0c0b;
+  --color-surface: #141614;
+  --color-surface-2: #1c1e1c;
+  --color-fg: #f2f3ee;
+  --color-muted: #8d9188;
+  --color-faint: #6b6f68;
+  --color-border: #262926;
+  --color-accent: #c5d4c0;
+  --color-accent-fg: #0b0c0b;
+  --color-signal: #9dba8a;
+  --color-warn: #c4b08a;
+  --color-danger: #c4897e;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  * {
+    border-color: var(--color-border);
+  }
+}
+
+.radar-disc {
+  background:
+    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--color-signal) 18%, transparent) 0 2px, transparent 3px),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 9px,
+      color-mix(in oklab, var(--color-signal) 16%, transparent) 9px 10px
+    );
+}
+
+.radar-sweep {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    color-mix(in oklab, var(--color-signal) 38%, transparent) 18deg,
+    transparent 42deg
+  );
+  animation: sweep 5.5s linear infinite;
+}
+
+.scan-line {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklab, var(--color-signal) 18%, transparent),
+    transparent
+  );
+  animation: scan 7s linear infinite;
+}
+
+@keyframes sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.live-dot {
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-sweep,
+  .scan-line,
+  .live-dot {
+    animation: none;
+  }
+}

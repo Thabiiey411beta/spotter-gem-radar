@@ -1,0 +1,17 @@
+node_modules
+dist
+.output
+.nitro
+.tanstack
+.vercel
+*.log
+.env
+.env.*
+.DS_Store
+screenshots
+artifacts
+.grok
+routeTree.gen.ts
+AGENTS.md
+.project_id
+.node_modules.lock
